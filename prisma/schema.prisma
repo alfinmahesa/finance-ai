@@ -1,0 +1,28 @@
+// Prisma schema untuk Finance AI Assistant
+// Database: SQLite (file lokal, cocok untuk project solo)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Daftar kategori yang dipakai AI Parser untuk mengklasifikasikan transaksi.
+// Fixed list (bukan bebas) supaya konsisten untuk dianalisis & divisualisasikan.
+// Kategori: Makanan, Transport, Belanja, Hiburan, Tagihan, Kesehatan, Pendapatan, Lainnya
+
+model Transaction {
+  id          String   @id @default(cuid())
+  rawText     String   // teks asli yang diketik user, contoh: "beli kopi 25rb"
+  description String   // deskripsi singkat hasil parsing AI, contoh: "Kopi"
+  amount      Int      // nominal dalam Rupiah, contoh: 25000
+  category    String   // salah satu dari kategori fixed di atas
+  type        String   // "expense" atau "income"
+  createdAt   DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([category])
+}

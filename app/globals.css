@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #faf8f3;
+  background-image:
+    linear-gradient(rgba(28, 35, 48, 0.025) 1px, transparent 1px);
+  background-size: 100% 32px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background-color: #c9a227;
+  color: #1c2330;
+}
